@@ -1,7 +1,7 @@
 /*
  * Copyright(C):    WhiZTiM, 2015
  *
- * This file is part of the TIML::UBEX C++14 library
+ * This file is part of the TIML::UBJSON C++14 library
  *
  * Distributed under the Boost Software License, Version 1.0.
  *      (See accompanying file LICENSE_1_0.txt or copy at
