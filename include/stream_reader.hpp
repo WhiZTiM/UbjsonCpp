@@ -86,10 +86,10 @@ namespace timl { namespace ubjson {
 
         //SFINAE zone :-)
         template<typename U = StreamType>
-        std::enable_if_t<std::is_base_of<std::istream, U>::value, bool> read_from_stream(byte*, std::size_t);
+        std::enable_if_t<std::is_base_of<std::istream, U>::value, bool> read_from_stream(byte*, std::size_t, bool peek = false);
 
         template<typename U = StreamType>
-        std::enable_if_t<not std::is_base_of<std::istream, U>::value, bool> read_from_stream(byte*, std::size_t);
+        std::enable_if_t<not std::is_base_of<std::istream, U>::value, bool> read_from_stream(byte*, std::size_t, bool peek = false);
         //decltype(std::declval<U>().peek(), std::true_type()()) read_from_stream(byte*, std::size_t);
 
         std::pair<byte, bool> peeked_byte;
@@ -160,7 +160,7 @@ namespace timl { namespace ubjson {
 
     template<typename StreamType>
     template<typename U> std::enable_if_t<std::is_base_of<std::istream, U>::value, bool>
-    StreamReader<StreamType>::read_from_stream(byte* b, std::size_t sz)
+    StreamReader<StreamType>::read_from_stream(byte* b, std::size_t sz, bool peek)
     {
         using std::to_string;
         using std::string;
@@ -168,16 +168,10 @@ namespace timl { namespace ubjson {
         if(bytes_so_far + sz > vsz.max_object_size)
             throw policy_violation("Maximum Object size read at: " + to_string(bytes_so_far));
 
-        if(peeked_byte.second)
-        {
-            b[0] = peeked_byte.first;
-            b = b + 1;
-
-            if(sz > 0)
-                --sz;
-        }
-
-        stream.read(to_cbyte(b), sz);
+        if(peek)
+            b[0] = static_cast<byte>(stream.peek());
+        else
+            stream.read(to_cbyte(b), sz);
         bytes_so_far += sz;
         peeked_byte.second = false;
         return true;
@@ -186,26 +180,30 @@ namespace timl { namespace ubjson {
 
     template<typename StreamType>
     template<typename U> std::enable_if_t<not std::is_base_of<std::istream, U>::value, bool>
-    StreamReader<StreamType>::read_from_stream(byte* b, std::size_t sz)
+    StreamReader<StreamType>::read_from_stream(byte* b, std::size_t sz, bool peek)
     {
         using std::to_string;
         using std::string;
 
-        if(bytes_so_far + sz > vsz.max_object_size)
-            throw policy_violation("Maximum Object size read at: " + to_string(bytes_so_far));
-
-        if(peeked_byte.second)
+        if(sz > 0)
         {
-            b[0] = peeked_byte.first;
-            b = b + 1;
+            if(bytes_so_far + sz > vsz.max_object_size)
+                throw policy_violation("Maximum Object size read at: " + to_string(bytes_so_far));
 
-            if(sz > 0)
-                --sz;
+            if(peek and peeked_byte.second)
+            {
+                b[0] = peeked_byte.first;
+                b = b + 1;
+                    --sz;
+            }
+            else if (peek)
+                peeked_byte.second = true;
+            else
+                peeked_byte.second = false;
+
+            stream.read(to_cbyte(b), sz);
+            bytes_so_far += sz;
         }
-
-        stream.read(to_cbyte(b), sz);
-        bytes_so_far += sz;
-        peeked_byte.second = false;
         return true;
     }
 
@@ -213,8 +211,7 @@ namespace timl { namespace ubjson {
     template<typename StreamType>
     byte StreamReader<StreamType>::peekNextByte()
     {
-        peeked_byte.first  = readNextByte();
-        peeked_byte.second = true;
+        read_from_stream<StreamType>(&peeked_byte.first, 1, true);
         return peeked_byte.first;
     }
 
