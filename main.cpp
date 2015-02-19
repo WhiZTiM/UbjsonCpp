@@ -81,7 +81,7 @@ void tst2()
 {
     Value v2;
     std::ifstream file;
-    file.open("tst.ubex", ios::binary);
+    file.open("sample.ubjson", ios::binary);
 
     StreamReader<decltype(file)> reader(file);
     if(reader.getNextValue(v2))

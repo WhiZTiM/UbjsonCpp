@@ -83,6 +83,15 @@ namespace timl { namespace ubjson {
         bool read(byte&);
         bool read(byte*, std::size_t);
 
+
+        //SFINAE zone :-)
+        template<typename U = StreamType>
+        std::enable_if_t<std::is_base_of<std::istream, U>::value, bool> read_from_stream(byte*, std::size_t);
+
+        template<typename U = StreamType>
+        std::enable_if_t<not std::is_base_of<std::istream, U>::value, bool> read_from_stream(byte*, std::size_t);
+        //decltype(std::declval<U>().peek(), std::true_type()()) read_from_stream(byte*, std::size_t);
+
         std::pair<byte, bool> peeked_byte;
 
         StreamType& stream;
@@ -146,6 +155,13 @@ namespace timl { namespace ubjson {
     template<typename StreamType>
     bool StreamReader<StreamType>::read(byte* b, std::size_t sz)
     {
+        return read_from_stream<StreamType>(b, sz);
+    }
+
+    template<typename StreamType>
+    template<typename U> std::enable_if_t<std::is_base_of<std::istream, U>::value, bool>
+    StreamReader<StreamType>::read_from_stream(byte* b, std::size_t sz)
+    {
         using std::to_string;
         using std::string;
 
@@ -167,6 +183,33 @@ namespace timl { namespace ubjson {
         return true;
     }
 
+
+    template<typename StreamType>
+    template<typename U> std::enable_if_t<not std::is_base_of<std::istream, U>::value, bool>
+    StreamReader<StreamType>::read_from_stream(byte* b, std::size_t sz)
+    {
+        using std::to_string;
+        using std::string;
+
+        if(bytes_so_far + sz > vsz.max_object_size)
+            throw policy_violation("Maximum Object size read at: " + to_string(bytes_so_far));
+
+        if(peeked_byte.second)
+        {
+            b[0] = peeked_byte.first;
+            b = b + 1;
+
+            if(sz > 0)
+                --sz;
+        }
+
+        stream.read(to_cbyte(b), sz);
+        bytes_so_far += sz;
+        peeked_byte.second = false;
+        return true;
+    }
+
+
     template<typename StreamType>
     byte StreamReader<StreamType>::peekNextByte()
     {
@@ -185,6 +228,14 @@ namespace timl { namespace ubjson {
         KeyMarker km;
         while ( (not header.is_valid) or (header.is_valid and header.item_count > 0)) {
 
+            if(not header.is_valid and is_container_end(type, peekNextByte()))
+                break;
+
+            //Edge case... I honestly find this a bit akward
+            //
+            //
+            // N/A
+
             Value value;
             switch (type) {
             case MarkerType::Object:
@@ -200,6 +251,7 @@ namespace timl { namespace ubjson {
             else
                 marker = readNextByte();
 
+
             extract_singleValueTo(marker, value);
             extract_containerValueTo(marker, value);
 
@@ -212,8 +264,6 @@ namespace timl { namespace ubjson {
                 break;
             }
             --header.item_count;
-            if(not header.is_valid and is_container_end(type, marker))
-                break;
         }
         --recursive_depth;
     }
@@ -300,18 +350,6 @@ namespace timl { namespace ubjson {
         else if(isArrayStart(marker))
             extract_Array(value);
     }
-
-
-    /*
-    template<typename StreamType>
-    KeyMarker StreamReader<StreamType>::extract_nextKeyMarker()
-    {
-        KeyMarker km;
-        km.key = extract_String();
-        km.marker = readNextByte();
-        return km;
-    }
-    */
 
     template<typename StreamType>
     std::pair<std::size_t, bool> StreamReader<StreamType>::extract_itemCount()
@@ -453,7 +491,7 @@ namespace timl { namespace ubjson {
     {
         auto icount = extract_itemCount();
         if(not icount.second)
-            throw parsing_exception("Invalid string length token encounted!");
+            return std::make_pair(std::string(), false);
 
         std::unique_ptr<byte[]> b(new byte[icount.first]);
         read(b.get(), icount.first);
