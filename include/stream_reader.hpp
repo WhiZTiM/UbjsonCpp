@@ -123,11 +123,9 @@ namespace timl { namespace ubjson {
             bytes_so_far = 0;
             recursive_depth = 0;
             peeked_byte.second = false;
-            byte b;
-            read(b);
-            if(not isObjectStart(b))
-                throw parsing_exception("Stream does not contain a valid Object - ObjectStartMarker");
-            extract_Object(v);
+            byte b = readNextByte();
+            extract_singleValueTo(b, v);
+            extract_containerValueTo(b, v);
             good = true;
         }
         catch(parsing_exception& pexecpt)
