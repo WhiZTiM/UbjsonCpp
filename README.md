@@ -93,7 +93,7 @@ Value binary = Binary({0xF3, 0x33, 0x76, 0xAA, 0x23});
 Reading from a Stream is very simple.
 ```C++
   std::ifstream input;
-  input.open("sample1.ubex", ios::binary);
+  input.open("sample1.ubj", ios::binary);
 
   StreamReader<decltype(input)> reader(input);
   Value val = reader.getNextValue();
@@ -111,7 +111,7 @@ Writing to a Stream is likewise very simple.
   planet["position"] = 3;
 
   std::ofstream output;
-  output.open("sample2.ubex", ios::binary);
+  output.open("sample2.ubj", ios::binary);
 
   StreamWriter<std::ostream> writer(output);
   auto result = writer.writeValue(planet);
@@ -121,7 +121,7 @@ Writing to a Stream is likewise very simple.
 ```
 ----------------------------------------------
 
-Pretty Printing.... easy:
+Pretty Printing.... easy (always outputs a valid json document):
 ```C++
 Value value;
 value["name"] = "Timothy"
@@ -129,14 +129,34 @@ value["country"] = "Nigeria";
 value["favorites"] = { 34.351, -253, '@', value["country"], 34, value};
 
 std::cout << to_ostream(value) << std::endl;
+// or 
+std::cout << to_ostream(value, to_ostream::pretty) << std::endl;
+
+// for compact printing use
+std::cout << to_ostream(value, to_ostream::compact) << std::endl;
 ```
+
+Output of the first to_ostream above is as shown below:
+```C++
+{
+    "name" : "Timothy",
+    "country" : "Nigeria",
+    "favorites" : [ 34.351, -253, "@", "Nigeria", 34,
+        {
+            "name" : "Timothy",
+            "country" : "Nigeria"
+        }]
+}
+```
+
+
 ----------------------------------------------
 
 #### Current Status as of 11th February, 2015
-* A StreamWriter hasn't been implemented - slated fo 16th Feb, 2015
-* High Precision numbers haven't been implemented for Value semmantics - slated for 15th Feb, 2015
-* The StreamReader is still in Alpha stage, hasn't been fully tested - beta, slated for 21th Feb, 2015
-* The requirements for StreamType isn't well defined, yet. - slated for - 19th Feb, 2015
+* A StreamWriter hasn't been implemented - slated fo 21th Feb, 2015
+* High Precision numbers haven't been implemented for Value semmantics - slated for 25th Feb, 2015
+* The StreamReader is still in Alpha stage, hasn't been fully tested - beta, slated for 27th Feb, 2015
+* The requirements for StreamType isn't well defined, yet. - slated for - 5th March, 2015
 
 ----------------------------------------------
 
