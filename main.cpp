@@ -82,7 +82,7 @@ void tst2()
     Value v2;
     std::ifstream file;
     //file.open("sample.ubjson", ios::binary);
-    file.open("MediaContent.ubj", ios::binary);
+    file.open("MediaTest.ubj", ios::binary);
 
     StreamReader<decltype(file)> reader(file);
     if(reader.getNextValue(v2))

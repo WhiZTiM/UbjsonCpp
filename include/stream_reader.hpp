@@ -169,8 +169,10 @@ namespace timl { namespace ubjson {
         if(peek)
             b[0] = static_cast<byte>(stream.peek());
         else
+        {
             stream.read(to_cbyte(b), sz);
-        bytes_so_far += sz;
+            bytes_so_far += sz;
+        }
         peeked_byte.second = false;
         return true;
     }
@@ -224,7 +226,10 @@ namespace timl { namespace ubjson {
         while ( (not header.is_valid) or (header.is_valid and header.item_count > 0)) {
 
             if(not header.is_valid and is_container_end(type, peekNextByte()))
+            {
+                readNextByte(); //peel it off the stream
                 break;
+            }
 
             //Edge case... I honestly find this a bit akward
             //
@@ -382,6 +387,7 @@ namespace timl { namespace ubjson {
         case MarkerType::Object:
             if(isObjectEnd(b))
                 return true;
+            break;
         case MarkerType::Array:
             if(isArrayEnd(b))
                 return true;
