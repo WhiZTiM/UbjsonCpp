@@ -1,11 +1,11 @@
 # UbjsonCpp
 ## A high performance C++14 library for effortlessly reading and writing UBJSON 
 
-#### This library implements UBJSON Draft 10 and Value semmantics
+#### This library implements UBJSON Draft 12 and Value semmantics
 
 #### About
 Please see [UBJSON Official Website][ubjson_website]
-
+<br />
 #### About This Library
 UjsonCpp is a UBJSON Library that enables a client to seamlessly stream In/Out UBEXF encoded data from a StreamSource. The StreamSource is a template type that can be substituted provided it meets the Concept requirements. For example, std::ostream, std::istream and Boost.Asio can seamless be plugged in.
 
@@ -15,7 +15,7 @@ The Value type is an intuitive union type that is used to hold any UBJSON type, 
 
 #### Usage Snippet
 ```C++
-using namespace timl;
+using namespace timl::ubjson;
 Value v1, v2;
 
 v1 = 34535;     //Assign to integral types
@@ -39,7 +39,7 @@ If you are familiar with JsonCpp, using this library shouldn't be a problem :-).
 
 Modifiying Values in place? ...Yes
 ```C++
-using namespace timl;
+using namespace timl::ubjson;
 Value val = "Are we there yet Mr. Donald Knuth?";
 std::string& ref1 = val;
 auto& ref2 = static_cast<std::string&>(val);
@@ -54,7 +54,7 @@ auto boool = (ref1 == ref2) and (ref1 == val); //Will be true
 
 Key-Value pairs or Maps? ...perfect
 ```C++
-using namespace timl;
+using namespace timl::ubjson;
 Value m1("country", "Nigeria");
 Value m2;
 m2["country"] = "Nigeria";
@@ -67,7 +67,7 @@ m1 == m2;   //Compare an Value type;
 
 Arrays? ...No problems
 ```C++
-using namespace timl;
+using namespace timl::ubjson;
 Value array = {"Timothy", 2015, -34253535.235235, '@', Value("country", "Nigeria")};
 array.push_back("Amazing Array");
 
@@ -82,7 +82,7 @@ if(array.contains(2015))
 
 Value also has binary types:
 ```C++
-using namespace timl;
+using namespace timl::ubjson;
 using Binary = Value::BinaryType;   //Actually, an alias for std::vector<unsigned char>
 Value binary = Binary({0xF3, 0x33, 0x76, 0xAA, 0x23});
 ```
@@ -152,11 +152,11 @@ Output of the first to_ostream above is as shown below:
 
 ----------------------------------------------
 
-#### Current Status as of 11th February, 2015
-* A StreamWriter hasn't been implemented - slated fo 21th Feb, 2015
-* High Precision numbers haven't been implemented for Value semmantics - slated for 25th Feb, 2015
-* The StreamReader is still in Alpha stage, hasn't been fully tested - beta, slated for 27th Feb, 2015
-* The requirements for StreamType isn't well defined, yet. - slated for - 5th March, 2015
+#### Current Status
+* High Precision numbers haven't been implemented for Value semmantics - slated for 28th Feb, 2015
+* StreamReader and StreamWriter cannot cater for HighPrecision Numbers, and Binary - beta, slated for 20th March, 2015
+* StreamReader already handles Strongly typed containers, but StreamWriter is yet to do so - 20th March, 2015
+* The requirements for StreamType isn't well defined, yet. - slated for - 25th March, 2015
 
 ----------------------------------------------
 
