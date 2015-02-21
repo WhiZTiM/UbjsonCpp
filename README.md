@@ -7,7 +7,7 @@
 Please see [UBJSON Official Website][ubjson_website]
 <br />
 #### About This Library
-UjsonCpp is a UBJSON Library that enables a client to seamlessly stream In/Out UBEXF encoded data from a StreamSource. The StreamSource is a template type that can be substituted provided it meets the Concept requirements. For example, std::ostream, std::istream and Boost.Asio can seamless be plugged in.
+UjsonCpp is a UBJSON Library that enables a client to seamlessly stream In/Out UBJ encoded data from a StreamSource. The StreamSource is a template type that can be substituted provided it meets the Concept requirements. For example, std::ostream, std::istream and Boost.Asio can seamless be plugged in.
 
 This library has been implemented using *C++14*, as part of the timl (Timothy's Libraries) for public use.
 
@@ -33,7 +33,6 @@ std::string s2 = v2.asString();   //Value::asString() exception safe uncondition
 std::cout << v2.asInt() << std::endl;   //unconditionally cast to int (noexcept)....
 
 ```
-If you are familiar with JsonCpp, using this library shouldn't be a problem :-).
 
 ----------------------------------------------
 
@@ -137,7 +136,7 @@ std::cout << to_ostream(value, to_ostream::compact) << std::endl;
 ```
 
 Output of the first to_ostream above is as shown below:
-```C++
+```Javascript
 {
     "name" : "Timothy",
     "country" : "Nigeria",
