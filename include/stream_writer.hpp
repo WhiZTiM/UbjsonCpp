@@ -289,8 +289,8 @@ namespace timl { namespace ubjson {
         }
         else if(in_range(val, Float64::lowest(), Float64::max()))
         {
-            const uint64_t val = toBigEndianFloat64(val);
-            std::memcpy(b, &val, 8);
+            const uint64_t temp = toBigEndianFloat64(val);
+            std::memcpy(b, &temp, 8);
             write(Marker::Float64);
             write(b, 8);
             rtn = std::make_pair(9, true);
