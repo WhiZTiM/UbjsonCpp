@@ -25,7 +25,7 @@
 #ifndef TYPES_HPP
 #define TYPES_HPP
 
-namespace timl { namespace ubjson {
+namespace ubjson {
 
     using byte = unsigned char;
 
@@ -136,7 +136,6 @@ namespace timl { namespace ubjson {
     static_assert(sizeof(byte) == 1, "a byte must be exactly one byte(8 bits)");
 
 }   //end namespace ubjson
-}   //end namespace::timl
 
 #endif // TYPES_HPP
 

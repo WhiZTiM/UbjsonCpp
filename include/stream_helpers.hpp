@@ -7,7 +7,6 @@
 #include <limits>
 #include "types.hpp"
 
-namespace timl{
 namespace ubjson {
 
     using cbyte = char;
@@ -142,7 +141,6 @@ namespace ubjson {
         return rtn;
     }
 
-}
 }
 #endif // CONVERSIONS_HPP
 

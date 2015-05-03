@@ -19,7 +19,7 @@
 #include "value.hpp"
 #include "stream_helpers.hpp"
 
-namespace timl { namespace ubjson {
+namespace ubjson {
 
 
     template<typename StreamType>
@@ -318,7 +318,6 @@ namespace timl { namespace ubjson {
     }
 
 }   //end namespace ubjson
-}   //end namespace timl
 
 #endif // STREAM_WRITER_HPP
 

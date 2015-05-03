@@ -53,7 +53,6 @@
 #include "iterator.hpp"
 #include "types.hpp"
 
-namespace timl {
 namespace ubjson {
 
 
@@ -613,5 +612,5 @@ namespace ubjson {
     };
 
 
-}}
+}
 #endif // VALUE_H

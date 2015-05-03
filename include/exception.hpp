@@ -16,7 +16,7 @@
 #include <exception>
 #include <stdexcept>
 
-namespace timl
+namespace ubjson
 {
     class value_exception : public std::logic_error
     {

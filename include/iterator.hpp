@@ -17,8 +17,7 @@
 #include <iterator>
 #include "types.hpp"
 
-namespace timl
-{ namespace ubjson {
+namespace ubjson {
 
 
 template<typename Value_Type,
@@ -118,7 +117,7 @@ private:
     Array_IteratorType arr_iter;
 };
 
-}}
+}
 
 #endif // ITERATOR_HPP
 
