@@ -48,6 +48,7 @@
 #include <vector>
 #include <numeric>
 #include <unordered_map>
+#include <map>
 #include <initializer_list>
 #include "exception.hpp"
 #include "iterator.hpp"
@@ -313,7 +314,7 @@ namespace ubjson {
          * \brief determines whether the type of \a rhs can be compared with the type of the current \ref Value object
          * \param[in] rhs
          * \return \a true if
-         * \code this->type() == rhs.type() or timl::isNumeric(rhs.type()) and timl::isNumeric(this->type()) \endcode
+         * \code this->type() == rhs.type() or isNumeric(rhs.type()) and isNumeric(this->type()) \endcode
          */
         bool isComparableWith(const Value& rhs) const noexcept;
 

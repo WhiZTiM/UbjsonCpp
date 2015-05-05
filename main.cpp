@@ -24,7 +24,6 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 
 using namespace std;
-using namespace timl;
 using namespace ubjson;
 
 Value tst();
@@ -33,7 +32,7 @@ Value tst2();
 int main()
 {
     using namespace std::chrono;
-    /*
+    
     auto start = high_resolution_clock::now();
     CppUnit::TextUi::TestRunner runner;
     CppUnit::TestFactoryRegistry& registry = CppUnit::TestFactoryRegistry::getRegistry();
@@ -46,8 +45,10 @@ int main()
     extern int weird_cppunit_extern_bug_value_conversion_test;      weird_cppunit_extern_bug_value_conversion_test = 1;
     extern int weird_cppunit_extern_bug_value_map_and_array_test;   weird_cppunit_extern_bug_value_map_and_array_test = 1;
     extern int weird_cppunit_extern_bug_value_iterator_test;        weird_cppunit_extern_bug_value_iterator_test = 1;
-*/
+
     Value v1 = tst(), v2 = tst2();
+	cout << "V1 = " << to_ostream(v1) << '\n';
+	cout << "V2 = " << to_ostream(v2) << '\n';
     cout << "Are the written values the same?: " << boolalpha << (v1 == v2) << endl;
     //cout << "FIRST\n====\n" << to_ostream(v1) << endl;
     //cout << "SECOND\n=====\n" << to_ostream(v2) << endl;
@@ -62,7 +63,8 @@ Value tst()
     v1["name"] = "Ibrahim";
     v1["surname"] = "Onogu";
     v1["country"] = "NG";
-    v1["faves"] = {453, -34, '@', true, -9.80665, "So damn funny"};
+    v1["faves"] = {453, -34, '@', true, /*-9.80665,*/ "So damn funny"};
+
     //v1["arrays"] = {v1, v1, v1};
 
     //cout << to_ostream(v1) << endl;

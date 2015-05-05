@@ -2,7 +2,7 @@
 #include "../test_utils/format_helpers.hpp"
 #include <cppunit/extensions/HelperMacros.h>
 
-using namespace timl::ubjson;
+using namespace ubjson;
 int weird_cppunit_extern_bug_value_construction_test = 0;
 
 class Value_Construction_Test : public CppUnit::TestFixture

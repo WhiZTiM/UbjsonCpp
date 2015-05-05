@@ -6,7 +6,7 @@
 #include "value.hpp"
 
 //for CPPUNIT_ASSERT_EQUAL ...using ADL
-inline std::ostream& operator << (std::ostream& out, const timl::ubjson::Value::BinaryType& b)
+inline std::ostream& operator << (std::ostream& out, const ubjson::Value::BinaryType& b)
 {
     out << std::hex;
     for(auto a : b)

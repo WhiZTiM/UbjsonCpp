@@ -2,7 +2,7 @@
 #include "../test_utils/format_helpers.hpp"
 #include <cppunit/extensions/HelperMacros.h>
 
-using namespace timl::ubjson;
+using namespace ubjson;
 int weird_cppunit_extern_bug_value_map_and_array_test = 0;
 
 class Value_Map_and_Array_Test : public CppUnit::TestFixture
@@ -102,30 +102,30 @@ public:
         Value Binary(*v_binary);
 
         //test Array indexing operator
-        CPPUNIT_ASSERT_THROW(Null[0], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(Char[2], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(Bool[7], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(SignedInt[0], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(UnsignedInt[0], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(Float[0], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(String[0], timl::value_exception);
+        CPPUNIT_ASSERT_THROW(Null[0], value_exception);
+        CPPUNIT_ASSERT_THROW(Char[2], value_exception);
+        CPPUNIT_ASSERT_THROW(Bool[7], value_exception);
+        CPPUNIT_ASSERT_THROW(SignedInt[0], value_exception);
+        CPPUNIT_ASSERT_THROW(UnsignedInt[0], value_exception);
+        CPPUNIT_ASSERT_THROW(Float[0], value_exception);
+        CPPUNIT_ASSERT_THROW(String[0], value_exception);
         CPPUNIT_ASSERT_NO_THROW(Array[0] );
-        CPPUNIT_ASSERT_THROW(Map[0], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(Binary[0], timl::value_exception);
+        CPPUNIT_ASSERT_THROW(Map[0], value_exception);
+        CPPUNIT_ASSERT_THROW(Binary[0], value_exception);
 
 
         CPPUNIT_ASSERT_EQUAL( std::size_t(3), Map.size() );
         //Test Map insexing Operator
         CPPUNIT_ASSERT_NO_THROW(Null["haha"]);
-        CPPUNIT_ASSERT_THROW(Char["haha"], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(Bool["haha"], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(SignedInt["haha"], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(UnsignedInt["haha"], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(Float["haha"], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(String["haha"], timl::value_exception);
-        CPPUNIT_ASSERT_THROW(Array["haha"], timl::value_exception );
+        CPPUNIT_ASSERT_THROW(Char["haha"], value_exception);
+        CPPUNIT_ASSERT_THROW(Bool["haha"], value_exception);
+        CPPUNIT_ASSERT_THROW(SignedInt["haha"], value_exception);
+        CPPUNIT_ASSERT_THROW(UnsignedInt["haha"], value_exception);
+        CPPUNIT_ASSERT_THROW(Float["haha"], value_exception);
+        CPPUNIT_ASSERT_THROW(String["haha"], value_exception);
+        CPPUNIT_ASSERT_THROW(Array["haha"], value_exception );
         CPPUNIT_ASSERT_NO_THROW(Map["haha"]);
-        CPPUNIT_ASSERT_THROW(Binary["haha"], timl::value_exception);
+        CPPUNIT_ASSERT_THROW(Binary["haha"], value_exception);
         CPPUNIT_ASSERT_EQUAL( std::size_t(4), Map.size() );
     }
 
