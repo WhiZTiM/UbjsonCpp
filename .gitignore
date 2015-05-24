@@ -1,0 +1,16 @@
+*.a
+*.so
+*.ubj
+ubjsonCpp
+tests/CMake*
+tests/*.cmake
+tests/Makefile
+src/CMake*
+src/*.cmake
+src/Makefile
+include/CMake*
+include/*.cmake
+include/Makefile
+CMake*
+*.cmake
+Makefile
