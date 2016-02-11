@@ -39,16 +39,19 @@ namespace ubjson {
     inline bool in_range(double value, double min, double max)
     { return (min <= value and value <= max); }
 
-
+	inline
     uint16_t toBigEndian16(uint16_t val)
     {  return htobe16(val); }
 
+	inline
     uint32_t toBigEndian32(uint32_t val)
     {  return htobe32(val); }
 
+	inline
     uint64_t toBigEndian64(uint64_t val)
     {  return htobe64(val); }
 
+	inline
     uint32_t toBigEndianFloat32(float val)
     {
         uint32_t rtn;
@@ -56,6 +59,7 @@ namespace ubjson {
         return toBigEndian32( rtn );
     }
 
+	inline
     uint64_t toBigEndianFloat64(double val)
     {
         uint64_t rtn;
@@ -65,15 +69,19 @@ namespace ubjson {
 
 
 
+	inline
     uint16_t fromBigEndian16(uint16_t val)
     {  return be16toh(val); }
 
+	inline
     uint32_t fromBigEndian32(uint32_t val)
     {  return be32toh(val); }
 
+	inline
     uint64_t fromBigEndian64(uint64_t val)
     {  return be64toh(val); }
 
+	inline
     float fromBigEndianFloat32(uint32_t val)
     {
         float rtn;
@@ -82,6 +90,7 @@ namespace ubjson {
         return rtn;
     }
 
+	inline
     double fromBigEndianFloat64(uint64_t val)
     {
         double rtn;
@@ -99,11 +108,13 @@ namespace ubjson {
     ///////////////////////////////////////
 
 
+	inline
     uint8_t fromBigEndian8(byte* b)
     {
         return *b;
     }
 
+	inline
     uint16_t fromBigEndian16(byte* b)
     {
         uint16_t rtn;
@@ -111,6 +122,7 @@ namespace ubjson {
         return fromBigEndian16(rtn);
     }
 
+	inline
     uint32_t fromBigEndian32(byte* b)
     {
         uint32_t rtn;
@@ -118,6 +130,7 @@ namespace ubjson {
         return fromBigEndian32(rtn);
     }
 
+	inline
     uint64_t fromBigEndian64(byte* b)
     {
         uint64_t rtn;
@@ -125,6 +138,7 @@ namespace ubjson {
         return fromBigEndian64(rtn);
     }
 
+	inline
     float fromBigEndianFloat32(byte* b)
     {
         float rtn;
@@ -133,6 +147,7 @@ namespace ubjson {
         return rtn;
     }
 
+	inline
     double fromBigEndianFloat64(byte* b)
     {
         double rtn;
