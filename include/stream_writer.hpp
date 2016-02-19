@@ -281,16 +281,16 @@ namespace timl { namespace ubjson {
             //const uint32_t val = toBigEndianFloat32(static_cast<float>(val));
 
             float temp = static_cast<float>(val);           //Walkaround
-            const uint32_t val = toBigEndianFloat32(temp);  //Walkaround
-            std::memcpy(b, &val, 4);
+            const uint32_t val2 = toBigEndianFloat32(temp);  //Walkaround
+            std::memcpy(b, &val2, 4);
             write(Marker::Float32);
             write(b, 4);
             rtn = std::make_pair(5, true);
         }
         else if(in_range(val, Float64::lowest(), Float64::max()))
         {
-            const uint64_t val = toBigEndianFloat64(val);
-            std::memcpy(b, &val, 8);
+            const uint64_t val2 = toBigEndianFloat64(val);
+            std::memcpy(b, &val2, 8);
             write(Marker::Float64);
             write(b, 8);
             rtn = std::make_pair(9, true);
