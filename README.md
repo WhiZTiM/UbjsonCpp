@@ -15,7 +15,7 @@ The Value type is an intuitive union type that is used to hold any UBJSON type, 
 
 #### Usage Snippet
 ```C++
-using namespace timl::ubjson;
+using namespace ubjson;
 Value v1, v2;
 
 v1 = 34535;     //Assign to integral types
@@ -38,7 +38,7 @@ std::cout << v2.asInt() << std::endl;   //unconditionally cast to int (noexcept)
 
 Modifiying Values in place? ...Yes
 ```C++
-using namespace timl::ubjson;
+using namespace ubjson;
 Value val = "Are we there yet Mr. Donald Knuth?";
 std::string& ref1 = val;
 auto& ref2 = static_cast<std::string&>(val);
@@ -53,7 +53,7 @@ auto boool = (ref1 == ref2) and (ref1 == val); //Will be true
 
 Key-Value pairs or Maps? ...perfect
 ```C++
-using namespace timl::ubjson;
+using namespace ubjson;
 Value m1("country", "Nigeria");
 Value m2;
 m2["country"] = "Nigeria";
@@ -66,7 +66,7 @@ m1 == m2;   //Compare an Value type;
 
 Arrays? ...No problems
 ```C++
-using namespace timl::ubjson;
+using namespace ubjson;
 Value array = {"Timothy", 2015, -34253535.235235, '@', Value("country", "Nigeria")};
 array.push_back("Amazing Array");
 
@@ -81,7 +81,7 @@ if(array.contains(2015))
 
 Value also has binary types:
 ```C++
-using namespace timl::ubjson;
+using namespace ubjson;
 using Binary = Value::BinaryType;   //Actually, an alias for std::vector<unsigned char>
 Value binary = Binary({0xF3, 0x33, 0x76, 0xAA, 0x23});
 ```

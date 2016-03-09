@@ -21,7 +21,7 @@
 #include <tuple>
 #include <iostream>
 
-namespace timl { namespace ubjson {
+namespace ubjson {
 
     enum class MarkerType { Object, Array };
 
@@ -557,6 +557,5 @@ namespace timl { namespace ubjson {
     using OstreamReader = StreamReader<std::ifstream>;
 
 }   //end namespace ubjson
-}   //end namespace timl
 #endif // STREAM_READER_HPP
 

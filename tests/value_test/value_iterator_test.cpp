@@ -3,7 +3,7 @@
 #include "../test_utils/format_helpers.hpp"
 #include <cppunit/extensions/HelperMacros.h>
 
-using namespace timl::ubjson;
+using namespace ubjson;
 using namespace std;
 int weird_cppunit_extern_bug_value_iterator_test = 0;
 

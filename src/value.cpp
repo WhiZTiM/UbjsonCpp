@@ -19,7 +19,6 @@
 #include <algorithm>
 #include <iostream>
 
-using namespace timl;
 using namespace ubjson;
 
 /////////////////  FREE FUNCTIONS
@@ -809,7 +808,7 @@ Value::operator BinaryType const& () const&
 
 //////////////////////// FRIEND FUNCTION ///////////
 
-void timl::ubjson::swap(Value& v1, Value& v2)
+void ubjson::swap(Value& v1, Value& v2)
 {
     Value vt;
     vt.move_from( std::move( v2 ));
@@ -819,7 +818,7 @@ void timl::ubjson::swap(Value& v1, Value& v2)
 
 /////////////////////// FREE OPERATORS ////////////
 
-bool timl::ubjson::operator == (const Value& lhs, const Value& rhs)
+bool ubjson::operator == (const Value& lhs, const Value& rhs)
 {
     using limit = std::numeric_limits<double>;
 
@@ -850,8 +849,10 @@ bool timl::ubjson::operator == (const Value& lhs, const Value& rhs)
     return false;
 }
 
-bool timl::ubjson::operator != (const Value& lhs, const Value& rhs)
-{ return not timl::ubjson::operator == (lhs, rhs); }
+bool ubjson::operator != (const Value& lhs, const Value& rhs)
+{ 
+	return not ubjson::operator == (lhs, rhs); 
+}
 
 
 ///////////////////////////////////////////////////////////
@@ -861,7 +862,7 @@ bool timl::ubjson::operator != (const Value& lhs, const Value& rhs)
 ///////////////////////////////////////////////////////////
 
 
-std::ostream& timl::ubjson::operator << (std::ostream& os, to_ostream&& tos)
+std::ostream& ubjson::operator << (std::ostream& os, to_ostream&& tos)
 {
     tos.print_value(os, tos.value);
     return os;
