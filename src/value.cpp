@@ -761,7 +761,7 @@ Value::operator double const& () const&
 
 
 ///// std::string
-Value::operator std::string () &&
+Value::operator std::string&& () &&
 {
     if(vtype == Type::String)
         return std::move(value.String);
@@ -784,7 +784,7 @@ Value::operator std::string const& () const&
 
 
 ///// BinaryType
-Value::operator BinaryType () &&
+Value::operator BinaryType&& () &&
 {
     if(vtype == Type::Binary)
         return std::move(value.Binary);

@@ -466,11 +466,11 @@ namespace ubjson {
         operator unsigned long long& () &;
         operator unsigned long long const& () const&;
 
-        operator std::string () &&;
+        operator std::string&& () &&;
         operator std::string& () &;
         operator std::string const& () const&;
 
-        operator BinaryType () &&;
+        operator BinaryType&& () &&;
         operator BinaryType& () &;
         operator BinaryType const& () const&;
 
