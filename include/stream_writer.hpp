@@ -172,10 +172,10 @@ namespace ubjson {
     std::pair<size_t, bool> StreamWriter<StreamType>::append_key(const std::string& key)
     {
         std::size_t key_size = key.size();
-        append_size(key_size);
-        write(reinterpret_cast<const byte*>(key.c_str()), key_size);
+        auto sz = append_size(key_size);
+        auto written = write(reinterpret_cast<const byte*>(key.c_str()), key_size);
 
-        return std::make_pair(1 + key_size, true);
+        return std::make_pair(sz.first + key_size, sz.second && written);
     }
 
     template<typename StreamType>
@@ -195,7 +195,8 @@ namespace ubjson {
         const std::size_t size = str.size();
         write(Marker::String);
         auto rtn = append_size(size);
-        write(reinterpret_cast<const byte*>(str.data()), size);
+        if(size != 0)           //Empty strings are permitted
+            write(reinterpret_cast<const byte*>(str.data()), size);
         rtn.first += size + 1;
         return rtn;
     }
