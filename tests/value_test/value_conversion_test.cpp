@@ -431,8 +431,8 @@ public:
         Value Array(*v_array);
         Value Map(*v_map);
         Value Binary(*v_binary);
-/*
-        CPPUNIT_ASSERT_THROW(auto&& k = std::move(Null), bad_value_cast);
+
+        CPPUNIT_ASSERT_THROW(std::string&& k = std::move(Null), bad_value_cast);
         CPPUNIT_ASSERT_THROW(std::string&& k = std::move(Char), bad_value_cast);
         CPPUNIT_ASSERT_THROW(std::string&& k = std::move(Bool), bad_value_cast);
         CPPUNIT_ASSERT_THROW(std::string&& k = std::move(SignedInt), bad_value_cast);
@@ -461,7 +461,13 @@ public:
         std::string var = std::move(String_A);
         CPPUNIT_ASSERT(String_A == Value(""));
         CPPUNIT_ASSERT(var == Value("Nice"));
-*/
+
+        //Test unused rvalue conversion
+        Value temp01 = "Hahah";
+        auto&& temp0001 = static_cast<std::string&&>(std::move(temp01));
+        (void)temp0001;
+        CPPUNIT_ASSERT(temp01 == "Hahah");
+
     }
 
     void test_binaryTypeOperator()
