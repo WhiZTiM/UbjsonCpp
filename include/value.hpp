@@ -285,7 +285,7 @@ namespace ubjson {
         //! Returns whether the contained type is a floating point type (double)
         bool isFloat() const noexcept;
 
-        //! Returns whether the contained type is a floating point type. (double)
+        //! Returns whether the contained type is \ref ArrayType "Array"
         bool isArray() const noexcept;
 
         //! The same thing as \ref isMap()
