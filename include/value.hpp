@@ -50,6 +50,8 @@
 #include <unordered_map>
 #include <map>
 #include <initializer_list>
+#include <iso646.h>
+
 #include "exception.hpp"
 #include "iterator.hpp"
 #include "types.hpp"

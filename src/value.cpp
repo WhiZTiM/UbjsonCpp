@@ -13,11 +13,13 @@
 
 
 #include "value.hpp"
+
 #include <cmath>
 #include <limits>
 #include <cstring>
 #include <algorithm>
 #include <iostream>
+#include <iso646.h>
 
 using namespace ubjson;
 
