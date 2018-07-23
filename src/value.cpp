@@ -45,7 +45,7 @@ inline Value::MapType unique_ptr_copy(const Value::MapType& src)
 }
 
 inline bool in_range(double value, double min, double max)
-{ return (min <= value and value <= max); }
+{ return (min <= value && value <= max); }
 
 inline bool is_equal(const Value::MapType& lhs, const Value::MapType& rhs)
 {
@@ -56,7 +56,7 @@ inline bool is_equal(const Value::MapType& lhs, const Value::MapType& rhs)
     {
         if(rhs.find(val.first) == rhs.end())
             return false;
-        if(not (*(lhs.at(val.first)) == *(rhs.at(val.first))))
+        if(!(*(lhs.at(val.first)) == *(rhs.at(val.first))))
             return false;
     }
     return true;
@@ -345,7 +345,7 @@ bool Value::contains(const Value& v) const
 
 Value::Keys Value::keys() const
 {
-    if(not isMap())
+    if(!isMap())
         return Keys();
 
     Keys rtn;
@@ -365,14 +365,14 @@ bool Value::isString()  const noexcept { return vtype == Type::String; }
 bool Value::isSignedInteger()   const noexcept { return vtype == Type::SignedInt;   }
 bool Value::isUnsignedInteger() const noexcept { return vtype == Type::UnsignedInt; }
 bool Value::isObject()  const noexcept  { return isMap();                       }
-bool Value::isNumeric()  const noexcept { return isInteger() or isFloat();     }
-bool Value::isInteger() const noexcept  { return isSignedInteger() or isUnsignedInteger(); }
+bool Value::isNumeric()  const noexcept { return isInteger() || isFloat();     }
+bool Value::isInteger() const noexcept  { return isSignedInteger() || isUnsignedInteger(); }
 
 bool Value::isComparableWith(const Value &rhs) const noexcept
 {
     if(type() == rhs.type())
         return true;
-    return (isNumeric() and rhs.isNumeric());
+    return (isNumeric() && rhs.isNumeric());
 }
 
 
@@ -822,7 +822,7 @@ bool ubjson::operator == (const Value& lhs, const Value& rhs)
 {
     using limit = std::numeric_limits<double>;
 
-    if(lhs.isNumeric() and rhs.isNumeric())
+    if(lhs.isNumeric() && rhs.isNumeric())
         return std::abs(lhs.asFloat() - rhs.asFloat()) <= limit::epsilon();
 
     if(lhs.type() != rhs.type())
@@ -851,7 +851,7 @@ bool ubjson::operator == (const Value& lhs, const Value& rhs)
 
 bool ubjson::operator != (const Value& lhs, const Value& rhs)
 { 
-	return not ubjson::operator == (lhs, rhs); 
+	return !ubjson::operator == (lhs, rhs); 
 }
 
 

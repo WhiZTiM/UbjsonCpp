@@ -552,7 +552,7 @@ namespace ubjson {
         { addendum.push_back(c); }
 
         inline void pop_addendum() {
-            if(not addendum.empty())
+            if(!addendum.empty())
                 addendum.pop_back();
         }
 

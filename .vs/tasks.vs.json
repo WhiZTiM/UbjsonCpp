@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "task-UbjsonCpp",
+      "appliesTo": "/",
+      "type": "launch"
+    },
+    {
+      "taskName": "task-UbjsonCpp",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}

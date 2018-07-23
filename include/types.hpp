@@ -101,7 +101,7 @@ namespace ubjson {
 
 
     constexpr bool isSignedNumber(byte b)
-    { return isInt16(b) or isInt32(b) or isInt64(b);  }
+    { return isInt16(b) || isInt32(b) || isInt64(b);  }
 
     constexpr bool isNumber(byte b)
     { return isSignedNumber(b);  }
@@ -128,10 +128,10 @@ namespace ubjson {
     { return b == Marker::Optimized_Count; }
 
     constexpr bool isOptimizedMarker(byte b)
-    { return isOptimized_Count(b) or isOptimized_Type(b); }
+    { return isOptimized_Count(b) || isOptimized_Type(b); }
 
     constexpr bool requiresPayload(byte b)
-    { return isObjectStart(b) or isString(b) or isBinary(b) or isArrayStart(b); }
+    { return isObjectStart(b) || isString(b) || isBinary(b) || isArrayStart(b); }
 
     static_assert(sizeof(byte) == 1, "a byte must be exactly one byte(8 bits)");
 
