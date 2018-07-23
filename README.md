@@ -152,16 +152,12 @@ Output of the first to_ostream above is as shown below:
 ----------------------------------------------
 
 #### Current Status
-* High Precision numbers haven't been implemented for Value semmantics - slated for 28th Feb, 2015
-* StreamReader and StreamWriter cannot cater for HighPrecision Numbers, and Binary - beta, slated for 20th March, 2015
-* StreamReader already handles Strongly typed containers, but StreamWriter is yet to do so - 20th March, 2015
-* The requirements for StreamType isn't well defined, yet. - slated for - 25th March, 2015
+* High Precision numbers haven't been implemented for Value semmantics - slated for 28th Aug, 2018
+* StreamReader and StreamWriter cannot cater for HighPrecision Numbers, and Binary - beta, slated for 20th Aug, 2018
+* StreamReader already handles Strongly typed containers, but StreamWriter is yet to do so - 20th Aug, 2018
+* The requirements for StreamType isn't well defined, yet. - slated for - 25th Aug, 2018
 
 ----------------------------------------------
 
 Written and authored by **Ibrahim Timothy Onogu.**
-Please drop a comment.
-
-http://ng.linkedin.com/pub/ibrahim-timothy-onogu/96/174/111
-
 [ubjson_website]: http://ubjson.org
