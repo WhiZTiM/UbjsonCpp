@@ -25,6 +25,8 @@
 #ifndef TYPES_HPP
 #define TYPES_HPP
 
+#include <iso646.h>
+
 namespace ubjson {
 
     using byte = unsigned char;
